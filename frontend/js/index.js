@@ -11,3 +11,15 @@ document.addEventListener("mousemove", e => {
 document.addEventListener("DOMContentLoaded", () => {
 	document.dispatchEvent(new Event("mousemove"));
 });
+
+// Youtube code
+async function getTranscript(url) {
+	const res = await fetch("/transcript", {
+		body: JSON.stringify({ url }),
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	return await res.json();
+}
