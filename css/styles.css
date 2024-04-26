@@ -1,6 +1,45 @@
+:root {
+    --bg-main: #17181D;
+    --bg-secondary: #1E2027;
+    --primary-dark: #111E2D;
+}
 
 body {
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+    background-color: var(--bg-secondary);
+    font-family: 'Poppins', sans-serif;
+}
+
+.page-bg {
+    position: absolute;
+    inset: 0;
+}
+
+.glow-bg {
+    background-image: radial-gradient(57.01% 13.63% at 50% 0%, var(--primary-dark) 0%, var(--bg-main) 100%);
+}
+
+.grid-bg {
+	background-size: 70px 70px;
+	background-image: linear-gradient(to right, var(--bg-secondary) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--bg-secondary) 1px, transparent 1px);
+}
+
+.inverse-glow-bg {
+    background-image: radial-gradient(57.01% 13.63% at 50% 0%, var(--primary-dark) 0%, transparent 100%);
+}
+
+.inverse-grid-bg {
+	background-size: 70px 70px;
+	background-image: url(/img/square.svg)
+}
+
+#glow-ball {
+    position: absolute;
+    background-image: radial-gradient(50% 50% at 50% 50%, #5FB4F2 20%, rgba(95, 180, 242, 0.00) 100%);
+    width: 400px;
+    height: 400px;
+    opacity: 0.2;
 }
