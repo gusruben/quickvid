@@ -1,9 +1,14 @@
 :root {
     --bg-main: #17181D;
     --bg-secondary: #1E2027;
+    --bg-tertiary: #232428;
     --primary: #61C6F4;
+    --primary-semitransparent: rgba(97, 198, 244, 0.5);
     --primary-transparent: rgba(97, 198, 244, 0.1);
     --primary-dark: #111E2D;
+    --text: #B7BABE;
+    --text-secondary: #505557;
+    --border: #393A3C;
 }
 
 body {
@@ -12,6 +17,7 @@ body {
 	height: 100vh;
     background-color: var(--bg-secondary);
     font-family: 'Poppins', sans-serif;
+    color: var(--text);
 }
 
 .page-bg {
@@ -53,6 +59,17 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.navbar {
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar.center {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .title {
     /* font-family: 'Abril Fatface'; */
     font-weight: normal;
@@ -60,4 +77,52 @@ body {
     color: var(--primary);
     letter-spacing: 0.05em;
     filter: drop-shadow(0 0 30px var(--primary-transparent));
+    margin: 0.25em;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+input {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text);
+    outline: none;
+    transition: 0.1s ease-out;
+    font-family: 'Poppins', sans-serif;
+    padding: 0.3em 0.5em;
+}
+input:focus {
+    border: 1px solid var(--primary);
+}
+input::placeholder {
+    color: var(--text-secondary);
+}
+
+button {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--primary-semitransparent);
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary);
+    padding: 0.3em 0.5em;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+button:hover {
+    border: 1px solid var(--primary);
+    filter: brightness(1.1)
+}
+
+#summarize-button {
+    font-size: 1.3rem;
+}
+
+#url-input {
+    font-size: 1.3rem;
+    width: 30rem;
+    max-width: 60vw;
+    min-width: initial;
 }
