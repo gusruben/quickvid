@@ -16,8 +16,12 @@ body {
 	width: 100vw;
 	height: 100vh;
     background-color: var(--bg-secondary);
+}
+
+* {
     font-family: 'Poppins', sans-serif;
     color: var(--text);
+    transition: 0.2s ease-out;
 }
 
 .page-bg {
@@ -41,7 +45,8 @@ body {
 
 .inverse-grid-bg {
 	background-size: 70px 70px;
-	background-image: url(/img/square.svg)
+	background-image: url(/img/square.svg);
+
 }
 
 #glow-ball {
@@ -62,12 +67,29 @@ body {
 .navbar {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: start;
 }
 
 .navbar.center {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.navbar:not(.center) {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.navbar:not(.center) .title {
+    font-size: 2rem;
+    margin: 0.5em;
+}
+
+.hidden {
+    opacity: 0;
 }
 
 .title {
@@ -89,10 +111,7 @@ body {
 input {
     background-color: var(--bg-tertiary);
     border: 1px solid var(--border);
-    color: var(--text);
     outline: none;
-    transition: 0.1s ease-out;
-    font-family: 'Poppins', sans-serif;
     padding: 0.3em 0.5em;
 }
 input:focus {
@@ -105,11 +124,8 @@ input::placeholder {
 button {
     background-color: var(--bg-tertiary);
     border: 1px solid var(--primary-semitransparent);
-    font-family: 'Poppins', sans-serif;
-    color: var(--primary);
     padding: 0.3em 0.5em;
     cursor: pointer;
-    transition: 0.2s ease-out;
 }
 button:hover {
     border: 1px solid var(--primary);
@@ -125,4 +141,9 @@ button:hover {
     width: 30rem;
     max-width: 60vw;
     min-width: initial;
+}
+
+.navbar:not(.center) #summarize-button,
+.navbar:not(.center) #url-input {
+    font-size: 1rem;
 }

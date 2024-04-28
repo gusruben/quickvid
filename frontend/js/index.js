@@ -1,4 +1,4 @@
-// Styling effects code
+// Styling effects
 const glowBall = document.getElementById("glow-ball");
 const glowBallRadius = glowBall.offsetWidth / 2;
 
@@ -23,3 +23,12 @@ async function getSummary(url) {
 	const summary = await res.text();
 	return summary;
 }
+
+// page interactions
+document.getElementById("summarize-button").addEventListener("click", async () => {
+	document.getElementById("navbar-center").classList.add("hidden");
+	document.getElementById("navbar").classList.remove("hidden");
+
+	const url = document.getElementById("url-input").value;
+
+})
