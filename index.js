@@ -23,6 +23,13 @@ video with even more detail. Ensure you cover all key points, examples, and \
 techniques discussed in this portion of the video. Provide thorough \
 explanations for each step or concept introduced within this timeframe.";
 
+/**
+ * Generates text using gpt-3.5-turbo
+ * @param {string} prompt The system prompt to give the GPT model
+ * @param {string} text the text to operate on (the user input)
+ * @param {Array} chatHistory the chat history to provide to the GPT model (optional)
+ * @returns {Object} {response: string, chatHistory: Array}
+ */
 async function askGPT(prompt, text, chatHistory = []) {
 	const messages = [
 		...chatHistory,
@@ -43,6 +50,11 @@ async function askGPT(prompt, text, chatHistory = []) {
 	};
 }
 
+/**
+ * Gets the transcript of a YouTube video and breaks it into 5 minute chunks--[]
+ * @param {string} url The URL or ID of the YouTube video
+ * @returns {Object} {transcript: string, chunks: Array<string>}
+ */
 async function getTranscript(url) {
 	const captions = await YoutubeTranscript.fetchTranscript(url);
 	const fullTranscript = captions.map(caption => caption.text).join(" ");
