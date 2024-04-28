@@ -1,6 +1,8 @@
 :root {
     --bg-main: #17181D;
     --bg-secondary: #1E2027;
+    --primary: #61C6F4;
+    --primary-transparent: rgba(97, 198, 244, 0.1);
     --primary-dark: #111E2D;
 }
 
@@ -42,4 +44,20 @@ body {
     width: 400px;
     height: 400px;
     opacity: 0.2;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title {
+    /* font-family: 'Abril Fatface'; */
+    font-weight: normal;
+    font-size: 4rem;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    filter: drop-shadow(0 0 30px var(--primary-transparent));
 }
