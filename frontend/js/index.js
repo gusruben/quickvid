@@ -20,15 +20,22 @@ async function getSummary(url) {
 			"Content-Type": "application/json",
 		},
 	});
-	const summary = await res.text();
-	return summary;
+	return await res.json();
 }
 
 // page interactions
 document.getElementById("summarize-button").addEventListener("click", async () => {
-	document.getElementById("navbar-center").classList.add("hidden");
-	document.getElementById("navbar").classList.remove("hidden");
+	document.getElementById("navbar-center").classList.add("invisible");
+	document.getElementById("navbar").classList.remove("invisible");
 
 	const url = document.getElementById("url-input").value;
+	console.log(url);
+	document.getElementById("loader").classList.remove("hidden")
+	const { synopsis, summaryChunks } = await getSummary(url)
+	document.getElementById("loader").classList.add("hidden")
 
+	// load in text
+	document.getElementById("synopsis").innerText = synopsis;
 })
+
+// document.getElementById("summarize-button").click()

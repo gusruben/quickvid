@@ -26,11 +26,51 @@
 				<button id="summarize-button">Summarize</button>
 			</div>
 		</div>
-		<div class="navbar hidden" id="navbar">
+		<div class="navbar invisible" id="navbar">
 			<h1 class="title">QuickVid</h1>
 			<div class="flex-row">
 				<input type="text" id="url-input" placeholder="https://youtube.com/watch?v=..." />
 				<button id="summarize-button">Summarize</button>
+			</div>
+		</div>
+
+		<div id="loader" class="loader hidden"></div>
+
+		<div id="main" class="hidden">
+			<!-- <div id="sidebar"></div> -->
+			<div id="summary">
+				<h1 id="video-title">Youtube Video Title</h1>
+				<a id="video-url" href="#">https://youtube.com/watch?v=782gd12u9odgsd</a>
+				<p id="video-synopsis">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua. Non sodales neque sodales ut etiam.
+					Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium
+					vulputate sapien. Nulla facilisi nullam vehicula ipsum a. In iaculis nunc sed
+					augue lacus viverra vitae congue. Consectetur adipiscing elit duis tristique
+					sollicitudin nibh sit amet commodo. Aliquet nibh praesent tristique magna sit
+					amet. Euismod nisi porta lorem mollis. Vulputate eu scelerisque felis imperdiet.
+					Et malesuada fames ac turpis. Urna molestie at elementum eu facilisis. Sit amet
+					cursus sit amet dictum sit amet. Sagittis purus sit amet volutpat. Commodo
+					viverra maecenas accumsan lacus vel facilisis volutpat est. Vitae nunc sed velit
+					dignissim sodales ut eu.
+				</p>
+				<div id="video-chunks">
+					<!-- this chunk is copied and modified using javascript -->
+					<div class="chunk" id="template-chunk" style="display: none">
+						<div class="chunk-top">
+							<p class="chunk-timestamp">0:00 - 5:00</p>
+							<p class="chunk-title">Something happens in this part of the video</p>
+							<p class="chunk-dropdown">+</p>
+						</div>
+						<p class="chunk-summary">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Non sodales neque
+							sodales ut etiam. Egestas fringilla phasellus faucibus scelerisque
+							eleifend donec pretium vulputate sapien. Nulla facilisi nullam vehicula
+							ipsum a. In iaculis nunc sed augue lacus viverra vitae congue.
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 
