@@ -164,7 +164,7 @@ button:hover {
 	border: 1px solid var(--border);
 	border-bottom: none;
 	border-radius: var(--radius) var(--radius) 0 0;
-	position: absolute;
+	position: fixed;
 	top: 7rem;
 	left: 7rem;
 	right: 7rem;
@@ -172,6 +172,7 @@ button:hover {
 
 	display: flex;
 	flex-direction: row;
+    overflow-y: scroll;
 }
 
 #sidebar {
@@ -226,6 +227,9 @@ button:hover {
 	display: flex;
 	flex-direction: column;
 	cursor: pointer;
+}
+.chunk:last-child {
+    margin-bottom: 2rem;
 }
 
 .chunk-top {

@@ -56,8 +56,11 @@ async function summarize() {
 		elem.id = ""
 		elem.style="";
 		elem.getElementsByClassName("chunk-summary")[0].innerText = chunk.summary;
-		elem.getElementsByClassName("chunk-timestamp")[0].innerText = `${chunk.start} - ${chunk.end}`;
+		elem.getElementsByClassName("chunk-timestamp")[0].innerText = `${chunk.start}s - ${chunk.end}s!`;
 		elem.getElementsByClassName("chunk-title")[0].innerText = `Section ${i+1}`;
+		elem.addEventListener("click", () => {
+			elem.classList.toggle("expanded");
+		})
 		document.getElementById("video-chunks").appendChild(elem)
 	})
 	document.getElementById("main").classList.remove("hidden")
