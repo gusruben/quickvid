@@ -48,14 +48,15 @@ function formatSecondsToMinutes(seconds, roundToFiveMinutes = false) {
 // page interactions
 async function summarize() {
 	const url =
-		document.getElementById("url-input-center").value ||
-		document.getElementById("url-input").value;
+		document.getElementById("url-input").value ||
+		document.getElementById("url-input-center").value;
 	console.log(url);
 	document.getElementById("url-input-center").value = "";
 	document.getElementById("url-input").value = url;
 
 	document.getElementById("navbar-center").classList.add("invisible");
 	document.getElementById("navbar").classList.remove("invisible");
+	document.getElementById("main").classList.add("hidden");
 
 	document.getElementById("loader").classList.remove("hidden");
 	const { synopsis, summaryChunks, title } = await getSummary(url);
@@ -74,7 +75,7 @@ async function summarize() {
 		elem.getElementsByClassName("chunk-summary")[0].innerText = chunk.summary;
 		elem.getElementsByClassName("chunk-timestamp")[0].innerText = `${formatSecondsToMinutes(Math.round(
 			chunk.start
-		), i == summaryChunks.length-1)}s - ${formatSecondsToMinutes(Math.round(chunk.end),i == summaryChunks.length-1)}s`;
+		), i == summaryChunks.length-1)} - ${formatSecondsToMinutes(Math.round(chunk.end),i == summaryChunks.length-1)}`;
 		elem.getElementsByClassName("chunk-title")[0].innerText = `Section ${i + 1}`;
 		elem.addEventListener("click", () => {
 			elem.classList.toggle("expanded");
