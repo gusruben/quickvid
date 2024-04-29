@@ -1,7 +1,8 @@
-import express, { text } from "express";
+import express from "express";
 import { YoutubeTranscript } from "youtube-transcript";
 import OpenAI from "openai";
 import "dotenv/config";
+import axios from "axios";
 
 const app = express();
 app.use(express.json());
@@ -71,13 +72,31 @@ async function getTranscript(url) {
 	});
 	// add the last chunk
 	chunks.push(captions);
-
 	// extract the text from the chunks
-	const textChunks = chunks.map(chunk =>
-		chunk.map(caption => caption.text).join(" ")
-	);
+	const textChunks = chunks.map(chunk => {
+		return {
+			start: chunk[0].offset,
+			end: chunk[chunk.length - 1].offset,
+			text: chunk.map(caption => caption.text).join(" "),
+		};
+	});
 
 	return { transcript: fullTranscript, chunks: textChunks };
+}
+
+async function getVideoInfo(url) {
+	const regExp =
+		/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/ ]{11})/;
+	const ytVideoID = url.match(regExp)[1];
+	const endpoint = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${ytVideoID}&key=${process.env.YOUTUBE_API_KEY}`;
+
+	const response = await axios.get(endpoint);
+	const data = response.data;
+	const title = data.items[0].snippet.title;
+	return {
+		title,
+		data,
+	};
 }
 
 app.post("/summarize", async (req, res) => {
@@ -87,25 +106,34 @@ app.post("/summarize", async (req, res) => {
 		return;
 	}
 
+	const info = await getVideoInfo(url);
+
 	console.log(`Recieved summary request for ${url}`);
 
 	const { transcript, chunks } = await getTranscript(url);
 
-	const { response: synopsis, chatHistory } = await askGPT(
-		SUMMARIZE_PROMPT,
-		transcript
-	);
+	const { response: synopsis, chatHistory } = await askGPT(SUMMARIZE_PROMPT, transcript);
 	// get a summary for each chunk
 	const summaryChunks = await Promise.all(
-		chunks.map(async chunk => (await askGPT(CHUNK_PROMPT, chunk, chatHistory)).response)
+		chunks
+			.map(async chunk => (await askGPT(CHUNK_PROMPT, chunk.text, chatHistory)).response)
+			.map(async prom => await prom)
 	);
+	const summaryChunksWithTimestamps = chunks.map((chunk, i) => {
+		return {
+			start: chunk.start,
+			end: chunk.end,
+			summary: summaryChunks[i],
+		};
+	});
 
-	res.send({ synopsis, summaryChunks });
+	console.log("DONE")
+	console.log(summaryChunksWithTimestamps)
+
+	res.send({ synopsis, summaryChunks: summaryChunksWithTimestamps, title: info.title, info: info.data });
 	// res.send({chatHistory})
 });
 
 app.use(express.static("frontend"));
 
-app.listen(PORT, HOSTNAME, () =>
-	console.log(`QuickVid Running on http://${HOSTNAME}:${PORT}`)
-);
+app.listen(PORT, HOSTNAME, () => console.log(`QuickVid Running on http://${HOSTNAME}:${PORT}`));

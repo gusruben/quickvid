@@ -143,19 +143,19 @@ button:hover {
 	filter: brightness(1.1);
 }
 
-#summarize-button {
+#summarize-button, #summarize-button-center {
 	font-size: 1.3rem;
 }
 
-#url-input {
+#url-input, #url-input-center {
 	font-size: 1.3rem;
 	width: 30rem;
 	max-width: 60vw;
 	min-width: initial;
 }
 
-.navbar:not(.center) #summarize-button,
-.navbar:not(.center) #url-input {
+#summarize-button,
+#url-input {
 	font-size: 1rem;
 }
 
