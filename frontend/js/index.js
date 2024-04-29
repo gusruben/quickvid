@@ -56,7 +56,7 @@ async function summarize() {
 		elem.id = ""
 		elem.style="";
 		elem.getElementsByClassName("chunk-summary")[0].innerText = chunk.summary;
-		elem.getElementsByClassName("chunk-timestamp")[0].innerText = `${chunk.start}s - ${chunk.end}s`;
+		elem.getElementsByClassName("chunk-timestamp")[0].innerText = `${Math.round(chunk.start)}s - ${Math.round(chunk.end)}s`;
 		elem.getElementsByClassName("chunk-title")[0].innerText = `Section ${i+1}`;
 		elem.addEventListener("click", () => {
 			elem.classList.toggle("expanded");
